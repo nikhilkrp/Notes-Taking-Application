@@ -40,7 +40,7 @@ export default function SignUp() {
     setLoading(true);
     setError("");
     try {
-      const res = await API.post("/auth/verify-otp", { email: form.email,name:form.name, otp});
+      const res = await API.post("/auth/verify-otp", { email: form.email, name:form.name, otp});
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
