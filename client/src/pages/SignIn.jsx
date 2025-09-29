@@ -50,7 +50,7 @@ export default function SignIn() {
     /* global google */
     if (window.google) {
       google.accounts.id.initialize({
-        client_id: "237643183909-68p2ei7irvhfnoqj92l335qq0mabrdv4.apps.googleusercontent.com", // replace with your actual client id
+        client_id:import.meta.env.VITE_API_KEY,
         callback: handleGoogleResponse,
       });
 
