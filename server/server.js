@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "https://notes-taking-application-git-main-nikhils-projects-9dc5e1f8.vercel.app",
+  origin: "https://notes-taking-application-git-main-nikhils-projects-9dc5e1f8.vercel.app/",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"], 
   credentials:true,
