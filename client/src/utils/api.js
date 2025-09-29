@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://notes-taking-application-64zj.onrender.com//api",
 });
 
 API.interceptors.request.use(config => {
