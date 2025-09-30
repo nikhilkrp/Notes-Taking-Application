@@ -29,7 +29,7 @@ const Dashboard = () => {
   // Fetch logged in user
   const fetchUser = async () => {
     try {
-      const res = await API.get("/auth/user", {
+      const res = await API.get("/api/auth/user", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
       setUser(res.data);
@@ -42,7 +42,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await API.get("/notes");
+        const res = await API.get("/api/notes");
         setNotes(res.data);
       } catch (err) {
         console.error(err);
@@ -56,7 +56,7 @@ const Dashboard = () => {
   const handleCreate = async () => {
     if (!title) return alert("Title is required");
     try {
-      const res = await API.post("/notes", { title, content });
+      const res = await API.post("/api/notes", { title, content });
       setNotes(prev => [res.data, ...prev]);
       setTitle("");
       setContent("");
@@ -69,7 +69,7 @@ const Dashboard = () => {
   // delete note
   const handleDelete = async (id) => {
     try {
-      await API.delete(`/notes/${id}`);
+      await API.delete(`/api/notes/${id}`);
       setNotes(prev => prev.filter(note => note._id !== id));
     } catch (err) {
       console.error(err);

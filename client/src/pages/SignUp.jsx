@@ -27,7 +27,7 @@ export default function SignUp() {
     setLoading(true);
     setError("");
     try {
-      await API.post("/auth/send-otp", { email: form.email, name: form.name });
+      await API.post("/api/auth/send-otp", { email: form.email, name: form.name });
       setStep(2);
     } catch (err) {
       setError(err.response?.data?.message || "Error sending OTP");
@@ -40,7 +40,7 @@ export default function SignUp() {
     setLoading(true);
     setError("");
     try {
-      const res = await API.post("/auth/verify-otp", { email: form.email, name:form.name, otp});
+      const res = await API.post("/api/auth/verify-otp", { email: form.email, name:form.name, otp});
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {

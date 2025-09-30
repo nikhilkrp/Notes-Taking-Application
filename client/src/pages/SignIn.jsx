@@ -24,7 +24,7 @@ export default function SignIn() {
     setLoading(true);
     setError("");
     try {
-      await API.post("/auth/send-otp", { name, email });
+      await API.post("/api/auth/send-otp", { name, email });
 
       setStep(2);
     } catch (err) {
@@ -37,7 +37,7 @@ export default function SignIn() {
     setLoading(true);
     setError("");
     try {
-      const res = await API.post("/auth/verify-otp", { name, email, otp });
+      const res = await API.post("/api/auth/verify-otp", { name, email, otp });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
