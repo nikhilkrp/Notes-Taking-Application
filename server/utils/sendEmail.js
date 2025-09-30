@@ -22,12 +22,12 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const sendEmail = async (email, otp, name) => {
+export const sendEmail = async (email, otp) => {
   console.log(`Attempting to send email to: ${email} via Resend`);
 
   try {
     const { data, error } = await resend.emails.send({
-       from: 'onboarding@resend.dev',
+      from: 'onboarding@resend.dev',
       to: [email],
       subject: 'Your OTP for Notes HD',
       html: `<p>Hello ${name},</p><p>Your OTP is: <strong>${otp}</strong></p><p>This code will expire in 10 minutes.</p>`,
