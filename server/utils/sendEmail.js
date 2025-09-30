@@ -17,34 +17,31 @@
 //   });
 // };
 
-import nodemailer from "nodemailer";
+import { Resend } from 'resend';
+
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendEmail = async (email, otp, name) => {
-  console.log(`Attempting to send email from: ${process.env.EMAIL_USER}`);
-
-
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, 
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, 
-    },
-  });
+  console.log(`Attempting to send email to: ${email} via Resend`);
 
   try {
-    await transporter.sendMail({
-      from: `"Notes HD App" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Your OTP for Notes HD",
-      text: `Hello ${name},\n\nYour OTP is: ${otp}\n\nThis code will expire in 10 minutes.`,
+    const { data, error } = await resend.emails.send({
+       from: 'onboarding@resend.dev',
+      to: [email],
+      subject: 'Your OTP for Notes HD',
       html: `<p>Hello ${name},</p><p>Your OTP is: <strong>${otp}</strong></p><p>This code will expire in 10 minutes.</p>`,
     });
-    console.log("Email sent successfully!");
+
+    if (error) {
+      console.error("Error sending email via Resend:", error);
+      throw error;
+    }
+
+    console.log("Email sent successfully via Resend!", data);
+    
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Caught exception while sending email:", error);
     throw error;
   }
 };
-
