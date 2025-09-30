@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://notes-taking-application-64zj.onrender.com/api",
+  baseURL: "import.meta.env.VITE_API_URL",
 });
 
 API.interceptors.request.use(config => {
