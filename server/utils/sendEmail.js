@@ -30,7 +30,7 @@ export const sendEmail = async (email, otp) => {
       from: 'onboarding@resend.dev',
       to: [email],
       subject: 'Your OTP for Notes HD',
-      html: `<p>Hello ${name},</p><p>Your OTP is: <strong>${otp}</strong></p><p>This code will expire in 10 minutes.</p>`,
+      html: `<p>Hello</p><p>Your OTP is: <strong>${otp}</strong></p><p>This code will expire in 10 minutes.</p>`,
     });
 
     if (error) {
