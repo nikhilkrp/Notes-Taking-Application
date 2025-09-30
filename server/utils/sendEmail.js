@@ -19,21 +19,23 @@
 
 import nodemailer from "nodemailer";
 
-export const sendEmail = async (email, otp, name) => { // Added name for a personal touch
-  // Log to confirm the environment variable is loaded
+export const sendEmail = async (email, otp, name) => {
   console.log(`Attempting to send email from: ${process.env.EMAIL_USER}`);
 
+
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, 
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, // This MUST be the 16-character App Password
+      pass: process.env.EMAIL_PASS, 
     },
   });
 
   try {
     await transporter.sendMail({
-      from: `"Notes HD App" <${process.env.EMAIL_USER}>`, // Recommended to add a sender name
+      from: `"Notes HD App" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Your OTP for Notes HD",
       text: `Hello ${name},\n\nYour OTP is: ${otp}\n\nThis code will expire in 10 minutes.`,
@@ -41,9 +43,7 @@ export const sendEmail = async (email, otp, name) => { // Added name for a perso
     });
     console.log("Email sent successfully!");
   } catch (error) {
-    // Log the detailed error to the console
     console.error("Error sending email:", error);
-    // Re-throw the error so the calling function knows something went wrong
     throw error;
   }
 };
